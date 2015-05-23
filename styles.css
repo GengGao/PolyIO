@@ -73,6 +73,3 @@ paper-fab {
   z-index: 1;
 }
 
-paper-tabs[noink][nobar] paper-tab.core-selected {
-  color: #ffff8d;
-}
