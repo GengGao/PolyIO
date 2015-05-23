@@ -1,0 +1,78 @@
+
+body {
+  font-family: RobotoDraft, sans-serif;
+  color: #333;
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+}
+
+section {
+  margin: 20px;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+core-toolbar {
+  background-color: #00BCD4;
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 1.5em;
+}
+
+core-menu {
+  padding: 0;
+  margin: 0;
+}
+
+core-menu paper-icon-button {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 1em;
+}
+
+paper-tabs, paper-tabs::shadow #tabsContainer {
+  background-color: #00BCD4;
+}
+
+paper-tabs paper-tab::shadow #ink {
+  color: rgba(255,255,255,.5);
+}
+
+[drawer], paper-tabs::shadow #selectionBar {
+  background-color: #FFF;
+}
+
+paper-button {
+  margin: 0.5em 1em 0.5em 0;
+  width: 10em;
+}
+
+paper-button[right] {
+  position: fixed;
+  right: 0;
+}
+
+paper-checkbox {
+  margin-left: 1em;
+}
+
+paper-fab {
+  position: absolute !important;
+  top: 35px;
+  right: 1em;
+  z-index: 1;
+}
+
+paper-tabs[noink][nobar] paper-tab.core-selected {
+  color: #ffff8d;
+}
