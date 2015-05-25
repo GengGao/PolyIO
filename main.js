@@ -1,9 +1,11 @@
 var app = document.querySelector('#app');
+// var app = document.querySelector('#app');
 
 app.config = {
   name: 'Google I/O 2015',
   date: 'May 28 - 29, 2015',
   location: 'San Francisco, CA',
+  scheduleAPI: 'data/schedule.json', // raw response from https://events.google.com/io2015/api/v1/schedule
   menu: {
     selected: 'explore'
   },
@@ -13,6 +15,7 @@ app.config = {
 };
 
 app.addEventListener('template-bound', function(e) {
+
   var draw = document.querySelector('core-drawer-panel');
   var menu = document.querySelector('core-menu');
 

@@ -11,13 +11,15 @@
 
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
 
+  <link rel="import" href="bower_components/font-roboto/roboto.html">
+
   <link rel="import" href="bower_components/core-icons/core-icons.html">
   <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
   <link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
   <link rel="import" href="bower_components/core-menu/core-menu.html">
   <link rel="import" href="bower_components/core-pages/core-pages.html">
+
   <link rel="import" href="bower_components/paper-item/paper-item.html">
-  <link rel="import" href="bower_components/font-roboto/roboto.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
   <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
   <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
@@ -25,82 +27,82 @@
   <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
   <link rel="import" href="bower_components/paper-toast/paper-toast.html">
 
+
+  <link rel="import" href="components/polyio-explore.html">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body unresolved>
-  
+
   <template is="auto-binding" id="app">
-  <core-drawer-panel>
-    <core-header-panel drawer>
-      <core-toolbar class="tall">
-          <div class="top logo" flex></div>
-          
-          <div class="bottom">
-            <div class="date">{{config.date}}</div>
-            <div class="location">{{config.location}}</div>
-          </div>
-      </core-toolbar>
-      <core-menu selected="{{config.menu.selected}}" valueattr="data-page">
-        <paper-item data-page="explore"><paper-icon-button icon="explore"></paper-icon-button> Explore</paper-item>
-        <paper-item data-page="schedule"><paper-icon-button icon="schedule"></paper-icon-button> Schedule</paper-item>
-        <paper-item data-page="about"><paper-icon-button icon="info"></paper-icon-button> About</paper-item>
-      </core-menu>
-    </core-header-panel> <!-- End core-header-panel drawer -->
 
-    <core-header-panel main>
-      <core-pages selected="{{config.menu.selected}}" valueattr="data-page">
-        <div data-page="explore">
-          <core-toolbar>
-            <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
-            <div tool flex>{{config.name}}</div>
-            <div tool><paper-icon-button icon="search"></paper-icon-button></div>
-          </core-toolbar>
-          <section>
-            explore
-          </section>
-        </div> <!-- End explore page -->
-        
-        <div data-page="schedule">
-          <core-toolbar class="medium-tall">
-            <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
-            <div tool flex>{{config.name}}</div>
-            <div tool><paper-icon-button icon="search"></paper-icon-button></div>
-            
-            <div class="bottom fit">
-              <paper-tabs selected="{{config.schedule.selected}}" scrollable>
-                <paper-tab>ITEM ONE</paper-tab>
-                <paper-tab>ITEM TWO</paper-tab>
-                <paper-tab>ITEM THREE</paper-tab>
-              </paper-tabs>
+    <core-drawer-panel>
+      <core-header-panel drawer>
+        <core-toolbar class="tall">
+            <div class="top logo" flex></div>
+
+            <div class="bottom">
+              <div class="date">{{config.date}}</div>
+              <div class="location">{{config.location}}</div>
             </div>
-            
-          </core-toolbar>
-          <section>
-            <core-pages selected="{{config.menu.selected}}-{{config.schedule.selected}}" valueattr="data-tab-id">
-              <div data-tab-id="schedule-0">Page 1</div>
-              <div data-tab-id="schedule-1">Page 2</div>
-              <div data-tab-id="schedule-2">Page 3</div>
-            </core-pages>
-          </section>
-        </div> <!-- End schedule page -->
+        </core-toolbar>
+        <core-menu selected="{{config.menu.selected}}" valueattr="data-page">
+          <paper-item data-page="explore"><paper-icon-button icon="explore"></paper-icon-button> Explore</paper-item>
+          <paper-item data-page="schedule"><paper-icon-button icon="schedule"></paper-icon-button> Schedule</paper-item>
+          <div class="divider"></div>
+          <paper-item data-page="about"><paper-icon-button icon="info"></paper-icon-button> About</paper-item>
+        </core-menu>
+      </core-header-panel> <!-- End core-header-panel drawer -->
 
-        <div data-page="about">
-          <core-toolbar>
-            <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
-            <div tool flex>About</div>
-          </core-toolbar>
-          <section>
-            {{config.name}}
-          </section>
-        </div> <!-- End about page -->
-      </core-pages>
-    </core-header-panel> <!-- End core-header-panel main -->
-      
-    
-  </core-drawer-panel> <!-- End core-drawer-panel -->
-  
-  
+      <core-header-panel main>
+        <core-pages selected="{{config.menu.selected}}" valueattr="data-page">
+          <div data-page="explore">
+            <core-toolbar>
+              <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+              <div tool flex>{{config.name}}</div>
+              <div tool><paper-icon-button icon="search"></paper-icon-button></div>
+            </core-toolbar>
+            <polyio-explore api="{{config.scheduleAPI}}"></polyio-explore>
+          </div> <!-- End explore page -->
+
+          <div data-page="schedule">
+            <core-toolbar class="medium-tall">
+              <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+              <div tool flex>{{config.name}}</div>
+              <div tool><paper-icon-button icon="search"></paper-icon-button></div>
+
+              <div class="bottom fit">
+                <paper-tabs selected="{{config.schedule.selected}}" scrollable>
+                  <paper-tab>ITEM ONE</paper-tab>
+                  <paper-tab>ITEM TWO</paper-tab>
+                  <paper-tab>ITEM THREE</paper-tab>
+                </paper-tabs>
+              </div>
+
+            </core-toolbar>
+            <section>
+              <core-pages selected="{{config.menu.selected}}-{{config.schedule.selected}}" valueattr="data-tab-id">
+                <div data-tab-id="schedule-0">Page 1</div>
+                <div data-tab-id="schedule-1">Page 2</div>
+                <div data-tab-id="schedule-2">Page 3</div>
+              </core-pages>
+            </section>
+          </div> <!-- End schedule page -->
+
+          <div data-page="about">
+            <core-toolbar>
+              <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+              <div tool flex>About</div>
+            </core-toolbar>
+            <section>
+              {{config.name}}
+            </section>
+          </div> <!-- End about page -->
+        </core-pages>
+      </core-header-panel> <!-- End core-header-panel main -->
+    </core-drawer-panel>
+
   </template>
   <script src="main.js"></script>
 </body>

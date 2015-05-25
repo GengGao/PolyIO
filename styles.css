@@ -19,7 +19,25 @@ a, a:hover {
   text-decoration: none;
 }
 
-core-toolbar {
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #EEE;
+}
+
+.date {
+  font-size: 0.8em;
+  line-height: 1.4;
+  color: #fff;
+}
+.location {
+  font-size: 0.9em;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #00636F;
+}
+
+core-toolbar, polyio-explore::shadow core-toolbar {
   background-color: #00BCD4;
   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
   color: #fff;

@@ -1,0 +1,74 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-image/core-image.html">
+
+<!--
+##### Example
+
+    <polyio-explore></polyio-explore>
+
+@element polyio-explore
+@blurb Element providing solution to Google I/O expolore page.
+@status WIP
+@homepage https://github.com/GengGao/PolyIO
+-->
+
+<polymer-element name="polyio-explore" attributes="api">
+  <template>
+    <link rel="stylesheet" href="polyio-explore.css">
+
+    <core-ajax
+    auto
+    url="{{api}}"
+    handleAs="json"
+    on-core-response="{{handleResponse}}"></core-ajax>
+
+    <section vertical layout>
+      <paper-shadow z="1">
+        <core-image sizing="cover" preload fade src="{{keynote.photoUrl}}"></core-image>
+        <section>
+            <h1>{{keynote.title}}</h1>
+            <span class="date">May {{keynote.day}} / {{keynote.start}}</span>
+        </section>
+      </paper-shadow>
+      <template repeat="{{key in tags | keys}}">
+        <template if="{{tags[key].category == 'THEME'}}">
+          <paper-shadow z="1">
+          <header layout horizontal center>
+            <h2 flex>{{tags[key].name}}</h2>
+            <a href="#"><paper-button>MORE</paper-button></a>
+          </header>
+          <section>
+
+          </section>
+          </paper-shadow>
+        </template>
+      </template>
+    </section>
+  </template>
+
+  <script>
+    Polymer('polyio-explore', {
+      ready: function() {
+        // console.log(this.api)
+      },
+      keys: function(input) {
+        if (input) {
+          return Object.keys(input);
+        }
+      },
+      handleResponse: function(e) {
+        console.log(e);
+        this.data = e.detail.response;
+        // reverse object orders
+        this.oTags = this.data.tags;
+        this.tags = {};
+        var tKeys = Object.keys(this.oTags);
+        for (var i = tKeys.length - 1; i >= 0; i--) {
+          this.tags[tKeys[i]] = this.oTags[tKeys[i]];
+        };
+        this.keynote = this.data.sessions[0];
+      }
+    });
+  </script>
+</polymer-element>

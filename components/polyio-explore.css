@@ -1,0 +1,81 @@
+:host {
+  display: block;
+}
+
+:host *,
+::content * {
+  font-family: RobotoDraft, sans-serif;
+  color: #333;
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+}
+
+::content > * {
+  border: 1px solid #aaa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+::content * {
+  font-size: 16px;
+  padding: 10px;
+}
+
+h1 {
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0.6em;
+}
+
+h2 {
+  font-size: 1.1em;
+  line-hight: 1.1em;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0.6em;
+}
+
+.date {
+  font-size: 0.9em;
+  line-height: 0.9em;
+  color: #008191;
+}
+
+section {
+  margin: 0;
+}
+
+paper-button {
+  font-size: 0.8em;
+  background-color: #EEE;
+  color: #008191;
+  margin: 0 1em;
+  top: -6px;
+}
+
+core-image {
+    background-color: #EEE;
+    width: 100%;
+    height: 200px;
+}
+
+paper-shadow {
+  margin: 0 0 1em 0;
+}
+
+paper-shadow header {
+  padding: 1em 0 .2em;
+  border-bottom: 1px solid #EEE;
+}
+
+paper-shadow header h2 {
+  text-indent: 1em;
+}
+
+paper-shadow section {
+  padding: 1em;
+}
