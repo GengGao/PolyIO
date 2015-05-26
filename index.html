@@ -9,6 +9,26 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#00BCD4">
 
+
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="PolyIO">
+
+
+  <link rel="shortcut icon" href="images/icon72.png">
+  <link rel="icon" sizes="192x192" href="images/icon192.png">
+  <link rel="apple-touch-icon" href="images/icon48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/icon72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/icon96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/icon144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/icon192.png">
+
+
+  <meta name="msapplication-TileImage" content="images/icon144.png">
+  <meta name="msapplication-TileColor" content="#00BCD4">
+  <meta name="msapplication-tap-highlight" content="no">
+
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
 
   <link rel="import" href="bower_components/font-roboto/roboto.html">
@@ -63,7 +83,9 @@
               <div tool flex>{{config.name}}</div>
               <div tool><paper-icon-button icon="search"></paper-icon-button></div>
             </core-toolbar>
-            <polyio-explore api="{{config.scheduleAPI}}"></polyio-explore>
+            <section>
+              <polyio-explore api="{{config.scheduleAPI}}"></polyio-explore>
+            </section>
           </div> <!-- End explore page -->
 
           <div data-page="schedule">
@@ -74,14 +96,14 @@
 
               <div class="bottom fit">
                 <paper-tabs selected="{{config.schedule.selected}}" scrollable>
-                  <paper-tab>ITEM ONE</paper-tab>
-                  <paper-tab>ITEM TWO</paper-tab>
-                  <paper-tab>ITEM THREE</paper-tab>
+                  <paper-tab>AGENDA</paper-tab>
+                  <paper-tab>DAY 1</paper-tab>
+                  <paper-tab>DAY 2</paper-tab>
                 </paper-tabs>
               </div>
 
             </core-toolbar>
-            <section>
+            <section class="content">
               <core-pages selected="{{config.menu.selected}}-{{config.schedule.selected}}" valueattr="data-tab-id">
                 <div data-tab-id="schedule-0">Page 1</div>
                 <div data-tab-id="schedule-1">Page 2</div>
@@ -95,7 +117,7 @@
               <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
               <div tool flex>About</div>
             </core-toolbar>
-            <section>
+            <section class="content">
               {{config.name}}
             </section>
           </div> <!-- End about page -->

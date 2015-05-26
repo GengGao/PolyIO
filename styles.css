@@ -1,3 +1,6 @@
+html, body {
+  height: 100%;
+}
 
 body {
   font-family: RobotoDraft, sans-serif;
@@ -9,10 +12,6 @@ body {
   user-select: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-touch-callout: none;
-}
-
-section {
-  margin: 20px;
 }
 
 a, a:hover {
@@ -35,6 +34,24 @@ a, a:hover {
   line-height: 1.4;
   font-weight: 500;
   color: #00636F;
+}
+
+
+.content {
+  padding: 1em;
+}
+
+core-pages {
+  height: 100%;
+  background-color: #F5F5F5;
+}
+
+core-pages section {
+  overflow: auto;
+  height: 90%;
+  height: calc(100% - 6em);
+  margin-top: -2em;
+  padding: 2em 0;
 }
 
 core-toolbar, polyio-explore::shadow core-toolbar {
@@ -68,6 +85,10 @@ paper-tabs paper-tab::shadow #ink {
 
 [drawer], paper-tabs::shadow #selectionBar {
   background-color: #FFF;
+}
+
+core-header-panel[drawer] {
+    z-index: 9999;
 }
 
 paper-button {

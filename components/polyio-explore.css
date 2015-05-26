@@ -64,7 +64,8 @@ core-image {
 }
 
 paper-shadow {
-  margin: 0 0 1em 0;
+  background-color: #FFF;
+  margin: 0 0 2em 0;
 }
 
 paper-shadow header {
@@ -78,4 +79,28 @@ paper-shadow header h2 {
 
 paper-shadow section {
   padding: 1em;
+}
+
+paper-shadow core-list {
+  min-height: 400px;
+}
+
+core-list .row {
+  height: 100px;
+  padding: 1em 0;
+}
+
+core-list .row .text-block {
+    padding: 1em;
+}
+
+core-list core-image.thumb {
+  width: 100px;
+  height: 80px;
+  background-color: #EEE;
+  margin: 0 0 0 1em;
+}
+
+paper-shadow paper-ripple {
+   z-index: 0;
 }
