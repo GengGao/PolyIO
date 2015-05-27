@@ -1,5 +1,5 @@
 :host {
-  display: block;
+  height: 100vh;
 }
 
 :host *,
@@ -13,16 +13,6 @@
   user-select: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-touch-callout: none;
-}
-
-::content > * {
-  border: 1px solid #aaa;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-::content * {
-  font-size: 16px;
-  padding: 10px;
 }
 
 h1 {

@@ -1,5 +1,4 @@
 var app = document.querySelector('#app');
-// var app = document.querySelector('#app');
 
 app.config = {
   name: 'Google I/O 2015',
@@ -12,6 +11,10 @@ app.config = {
   },
   schedule: {
     selected: 0
+  },
+  session: {
+    id: null,
+    selected: 'list'
   }
 };
 
@@ -23,7 +26,22 @@ app.addEventListener('template-bound', function(e) {
   var scheduleTabs = document.querySelector('div[data-page="schedule"] paper-tabs');
   var schedulePages = document.querySelector('div[data-page="schedule"] core-pages');
 
+  var explore = document.querySelector('polyio-explore');
+  var sessionDetails = document.querySelector('polyio-session-details');
+
   menu.addEventListener('core-select', function(e) {
     draw.closeDrawer();
+  });
+
+  explore.addEventListener('openSessionDetails', function(e) {
+    // console.log(e.type, e.detail.id);
+    app.config.session.id = e.detail.id;
+    app.config.session.selected = 'session';
+  });
+
+  sessionDetails.addEventListener('closeSessionDetails', function(e) {
+    // console.log(e.type, e.detail.id);
+    app.config.session.id = '';
+    app.config.session.selected = 'list';
   });
 });

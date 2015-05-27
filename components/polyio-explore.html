@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../bower_components/core-image/core-image.html">
 <link rel="import" href="../bower_components/core-list/core-list.html">
+<link rel="import" href="../bower_components/core-localstorage/core-localstorage.html">
 
 <!--
 ##### Example
@@ -18,14 +19,16 @@
   <template>
     <link rel="stylesheet" href="polyio-explore.css">
 
-    <core-ajax
-    auto
+    <core-ajax id="scheduleapi"
     url="{{api}}"
     handleAs="json"
     on-core-response="{{handleResponse}}"></core-ajax>
 
+    <core-localstorage name="polyio-schedule-data" value="{{data}}"></core-localstorage>
+    <core-localstorage name="polyio-schedule-version" value="{{timestamp}}"></core-localstorage>
+
     <section vertical layout>
-      <paper-shadow z="1">
+      <paper-shadow z="1" data-id="__keynote__" on-click="{{openDetails}}">
         <core-image sizing="cover" preload fade src="{{keynote.photoUrl}}"></core-image>
         <section>
             <h1>{{keynote.title}}</h1>
@@ -42,7 +45,7 @@
           </header>
             <core-list data="{{filterArray(sessions, 'tags', key)}}">
               <template>
-                <div class="row" layout horizontal center data-index="{{index}}">
+                <div class="row" layout horizontal center data-id="{{model.id}}" on-click="{{openDetails}}">
                     <core-image sizing="cover" class="thumb" preload fade src="{{model.photoUrl}}" flex></core-image>
                     <div class="text-block" flex two>{{model.title}}</div>
                     <paper-ripple fit></paper-ripple>
@@ -55,42 +58,60 @@
     </section>
   </template>
 
-  <script src="../bower_components/underscore/underscore.js"></script>
-  <script>
-    Polymer('polyio-explore', {
-      ready: function() {
-        // console.log(this.api)
-      },
-      keys: function(input) {
-        if (input) {
-          return Object.keys(input);
-        }
-      },
-      filterArray:  function(arr, key, match) {
-        var plucked = _.pluck(arr, key);
-        var filtered = [];
-
-        _.filter(plucked, function(k, index) {
-          if (_.contains(k, match)) {
-            filtered.push(arr[index]);
-          }
-        });
-
-        return filtered.slice(0, 5);
-      },
-      handleResponse: function(e) {
-        console.log(e);
-        this.data = e.detail.response;
-        // reverse object orders
-        this.oTags = this.data.tags;
-        this.tags = {};
-        var tKeys = Object.keys(this.oTags);
-        for (var i = tKeys.length - 1; i >= 0; i--) {
-          this.tags[tKeys[i]] = this.oTags[tKeys[i]];
-        };
-        this.keynote = this.data.sessions[0];
-        this.sessions = this.data.sessions;
+<script src="../bower_components/underscore/underscore.js"></script>
+<script>
+  Polymer('polyio-explore', {
+    ready: function() {
+      var data = JSON.parse(window.localStorage.getItem('polyio-schedule-data'));
+      if (!data) {
+        this.$.scheduleapi.go();
+      } else {
+        this.init(data);
       }
-    });
-  </script>
+      // console.log(this.api);
+    },
+    init: function(data) {
+      this.data = data;
+      this.timestamp = this.data.timestamp;
+
+      // reverse object orders
+      this.oTags = this.data.tags;
+      this.tags = {};
+      var tKeys = Object.keys(this.oTags);
+      for (var i = tKeys.length - 1; i >= 0; i--) {
+        this.tags[tKeys[i]] = this.oTags[tKeys[i]];
+      };
+      this.keynote = this.data.sessions[0];
+      this.sessions = this.data.sessions;
+    },
+    keys: function(input) {
+      if (input) {
+        return Object.keys(input);
+      }
+    },
+    filterArray:  function(arr, key, match) {
+      var plucked = _.pluck(arr, key);
+      var filtered = [];
+
+      _.filter(plucked, function(k, index) {
+        if (_.contains(k, match)) {
+          filtered.push(arr[index]);
+        }
+      });
+
+      return filtered.slice(0, 5);
+    },
+    openDetails: function(event, detail, sender) {
+      // console.log(event);
+      // console.log(detail);
+      // console.log(sender);
+      var sid = sender.dataset.id;
+      this.fire('openSessionDetails', {id: sid});
+    },
+    handleResponse: function(e) {
+      // console.log(e);
+      this.init(e.detail.response);
+    }
+  });
+</script>
 </polymer-element>

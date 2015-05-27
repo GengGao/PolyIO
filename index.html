@@ -38,7 +38,8 @@
   <link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
   <link rel="import" href="bower_components/core-menu/core-menu.html">
   <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
-  <link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-right.html">,
+  <link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-right.html">
+  <!-- <link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-bottom.html"> -->
 
   <link rel="import" href="bower_components/paper-item/paper-item.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
@@ -50,6 +51,7 @@
 
 
   <link rel="import" href="components/polyio-explore.html">
+  <link rel="import" href="components/polyio-session-details.html">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -79,16 +81,24 @@
       <core-header-panel main>
         <core-animated-pages selected="{{config.menu.selected}}" valueattr="data-page" transitions="cross-fade">
           <div data-page="explore">
-            <div cross-fade>
-              <core-toolbar>
-                <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
-                <div tool flex>{{config.name}}</div>
-                <div tool><paper-icon-button icon="search"></paper-icon-button></div>
-              </core-toolbar>
-              <section>
+          <core-animated-pages selected="{{config.session.selected}}" valueattr="data-session" transitions="cross-fade slide-from-right">
+            <div cross-fade data-session="list">
+              <div class="cross-fade slide-from-right">
+                <core-toolbar>
+                  <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+                  <div tool flex>{{config.name}}</div>
+                  <div tool><paper-icon-button icon="search"></paper-icon-button></div>
+                </core-toolbar>
+                <section id="explore-list">
                   <polyio-explore api="{{config.scheduleAPI}}"></polyio-explore>
-              </section>
+                </section>
+              </div>
             </div>
+
+            <section data-session="session">
+              <polyio-session-details cross-fade slide-from-right session="{{config.session.id}}"></polyio-session-details>
+            </section>
+          </core-animated-pages>
           </div> <!-- End explore page -->
 
           <div data-page="schedule">
@@ -108,15 +118,24 @@
 
               </core-toolbar>
               <section class="content">
-                <core-animated-pages selected="{{config.menu.selected}}-{{config.schedule.selected}}" valueattr="data-tab-id" transitions="slide-from-right">
+                <core-animated-pages selected="{{config.menu.selected}}-{{config.schedule.selected}}" valueattr="data-tab-id" transitions="cross-fade slide-from-right">
                   <div data-tab-id="schedule-0">
-                    <div slide-from-right>Page 1</div>
+                    <div cross-fade slide-from-right>
+                      Page 1
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
                   </div>
                   <div data-tab-id="schedule-1">
-                    <div slide-from-right>Page 2</div>
+                    <div cross-fade slide-from-right>
+                      Page 2
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
                   </div>
                   <div data-tab-id="schedule-2">
-                    <div slide-from-right>Page 3</div>
+                    <div cross-fade slide-from-right>
+                      Page 3
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
                   </div>
                 </core-animated-pages>
               </section>
@@ -139,6 +158,6 @@
     </core-drawer-panel>
 
   </template>
-  <script src="main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
