@@ -37,7 +37,8 @@
   <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
   <link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
   <link rel="import" href="bower_components/core-menu/core-menu.html">
-  <link rel="import" href="bower_components/core-pages/core-pages.html">
+  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+  <link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-right.html">,
 
   <link rel="import" href="bower_components/paper-item/paper-item.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
@@ -76,52 +77,64 @@
       </core-header-panel> <!-- End core-header-panel drawer -->
 
       <core-header-panel main>
-        <core-pages selected="{{config.menu.selected}}" valueattr="data-page">
+        <core-animated-pages selected="{{config.menu.selected}}" valueattr="data-page" transitions="cross-fade">
           <div data-page="explore">
-            <core-toolbar>
-              <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
-              <div tool flex>{{config.name}}</div>
-              <div tool><paper-icon-button icon="search"></paper-icon-button></div>
-            </core-toolbar>
-            <section>
-              <polyio-explore api="{{config.scheduleAPI}}"></polyio-explore>
-            </section>
+            <div cross-fade>
+              <core-toolbar>
+                <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+                <div tool flex>{{config.name}}</div>
+                <div tool><paper-icon-button icon="search"></paper-icon-button></div>
+              </core-toolbar>
+              <section>
+                  <polyio-explore api="{{config.scheduleAPI}}"></polyio-explore>
+              </section>
+            </div>
           </div> <!-- End explore page -->
 
           <div data-page="schedule">
-            <core-toolbar class="medium-tall">
-              <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
-              <div tool flex>{{config.name}}</div>
-              <div tool><paper-icon-button icon="search"></paper-icon-button></div>
+            <div cross-fade>
+              <core-toolbar class="medium-tall">
+                <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+                <div tool flex>{{config.name}}</div>
+                <div tool><paper-icon-button icon="search"></paper-icon-button></div>
 
-              <div class="bottom fit">
-                <paper-tabs selected="{{config.schedule.selected}}" scrollable>
-                  <paper-tab>AGENDA</paper-tab>
-                  <paper-tab>DAY 1</paper-tab>
-                  <paper-tab>DAY 2</paper-tab>
-                </paper-tabs>
-              </div>
+                <div class="bottom fit">
+                  <paper-tabs selected="{{config.schedule.selected}}" scrollable>
+                    <paper-tab>AGENDA</paper-tab>
+                    <paper-tab>DAY 1</paper-tab>
+                    <paper-tab>DAY 2</paper-tab>
+                  </paper-tabs>
+                </div>
 
-            </core-toolbar>
-            <section class="content">
-              <core-pages selected="{{config.menu.selected}}-{{config.schedule.selected}}" valueattr="data-tab-id">
-                <div data-tab-id="schedule-0">Page 1</div>
-                <div data-tab-id="schedule-1">Page 2</div>
-                <div data-tab-id="schedule-2">Page 3</div>
-              </core-pages>
-            </section>
+              </core-toolbar>
+              <section class="content">
+                <core-animated-pages selected="{{config.menu.selected}}-{{config.schedule.selected}}" valueattr="data-tab-id" transitions="slide-from-right">
+                  <div data-tab-id="schedule-0">
+                    <div slide-from-right>Page 1</div>
+                  </div>
+                  <div data-tab-id="schedule-1">
+                    <div slide-from-right>Page 2</div>
+                  </div>
+                  <div data-tab-id="schedule-2">
+                    <div slide-from-right>Page 3</div>
+                  </div>
+                </core-animated-pages>
+              </section>
+            </div>
           </div> <!-- End schedule page -->
 
           <div data-page="about">
-            <core-toolbar>
-              <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
-              <div tool flex>About</div>
-            </core-toolbar>
-            <section class="content">
-              {{config.name}}
-            </section>
+            <div cross-fade>
+              <core-toolbar>
+                <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+                <div tool flex>About</div>
+              </core-toolbar>
+              <section class="content">
+                {{config.name}}
+              </section>
+            </div>
           </div> <!-- End about page -->
-        </core-pages>
+        </core-animated-pages>
       </core-header-panel> <!-- End core-header-panel main -->
     </core-drawer-panel>
 
