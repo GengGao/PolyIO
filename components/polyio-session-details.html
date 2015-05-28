@@ -1,6 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-image/core-image.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icons/av-icons.html">
 <link rel="import" href="../bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+<!-- <link rel="import" href="../bower_components/core-list/core-list.html"> -->
 
 <!--
 ##### Example
@@ -23,11 +27,38 @@
         <!-- <core-image sizing="cover" preload fade fit src="{{detail.photoUrl}}"></core-image> -->
       </core-toolbar>
       <div vertical layout>
-        <paper-shadow z="1" class="content" >
+        <paper-shadow z="1" id="header-section" class="content">
             <h1>{{detail.title}}</h1>
-            <span class="date">May {{detail.day}} / {{detail.start}} - {{detail.end}}</span>
-            <p class="description">{{detail.description}}</p>
+            <span class="date">May {{detail.day}} / {{detail.start}} - {{detail.end}} / {{detail.room}}</span>
         </paper-shadow>
+
+        <paper-shadow z="1" id="description" class="content">
+          <p>{{detail.description}}</p>
+          <template if="{{detail.isLivestream}}">
+            <div class="livestream">Live streamed <core-icon class="video-icon" icon="av:videocam"></core-icon></div>
+          </template>
+          <br>
+          <template repeat="{{tag in detail.tags}}">
+            <paper-button raised>{{tag}}</paper-button>
+          </template>
+        </paper-shadow>
+
+         <template if="{{detail.speakers}}">
+           <paper-shadow z="1" id="speakers" class="content">
+           <h1>speakers</h1>
+           <core-list data="{{detail.speakers}}" id="speakersList">
+              <template>
+                <div class="row" layout horizontal top data-id="{{model}}">
+                    <core-image sizing="cover" class="thumb" preload fade src="{{speakers[model].thumbnailUrl}}"></core-image>
+                    <div layout vertical left flex two>
+                      <h3>{{speakers[model].name}}, {{speakers[model].company}}</h3>
+                      <div class="text-block">{{speakers[model].bio}}</div>
+                    </div>
+                </div>
+              </template>
+            </core-list>
+           </paper-shadow>
+         </template>
       </div>
     </core-scroll-header-panel>
 
@@ -44,6 +75,7 @@
 
       this.keynote = this.data.sessions[0];
       this.sessions = this.data.sessions;
+      this.speakers = this.data.speakers;
       // console.log(this.sessions);
       this.createIdMap(this.sessions);
       // console.log(this.idMap);
@@ -55,6 +87,7 @@
       return _.indexOf(this.idMap, id);
     },
     attributeChanged: function(attrName, oldVal, newVal) {
+      var that = this;
       //var newVal = this.getAttribute(attrName);
       // console.log(attrName, 'old: ' + oldVal, 'new:', newVal);
       if (newVal) {

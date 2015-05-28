@@ -22,6 +22,7 @@ app.addEventListener('template-bound', function(e) {
 
   var draw = document.querySelector('core-drawer-panel');
   var menu = document.querySelector('core-menu');
+  var corePage = document.querySelector('core-animated-pages');
 
   var scheduleTabs = document.querySelector('div[data-page="schedule"] paper-tabs');
   var schedulePages = document.querySelector('div[data-page="schedule"] core-pages');
@@ -44,10 +45,18 @@ app.addEventListener('template-bound', function(e) {
     app.config.session.id = '';
     app.config.session.selected = 'list';
   });
+
+  corePage.addEventListener('core-animated-pages-transition-end', function(e) {
+
+    var speakersList = sessionDetails.shadowRoot.querySelector('#speakersList');
+    if (speakersList) {
+      speakersList.updateSize();
+    }
+
+  });
 });
 
 window.addEventListener('load', function() {
-  var outputElement = document.getElementById('output');
   navigator.serviceWorker.register('service-worker.js', {scope: './'})
     .then(function(r) {
       console.log('registered service worker');
