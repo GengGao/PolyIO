@@ -1,0 +1,70 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-image/core-image.html">
+<link rel="import" href="../bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+
+<!--
+##### Example
+
+    <polyio-session-details></polyio-session-details>
+
+@element polyio-session-details
+@blurb Element providing solution to Google I/O expolore page.
+@status WIP
+@homepage https://github.com/GengGao/PolyIO
+-->
+
+<polymer-element name="polyio-session-details" session>
+  <template>
+    <link rel="stylesheet" href="polyio-session-details.css">
+
+    <core-scroll-header-panel flex condenses>
+      <core-toolbar class="tall" style="background: url({{detail.photoUrl}}) 0px 50% / cover no-repeat;">
+        <paper-icon-button icon="arrow-back" on-click="{{closeDetail}}"></paper-icon-button>
+        <!-- <core-image sizing="cover" preload fade fit src="{{detail.photoUrl}}"></core-image> -->
+      </core-toolbar>
+      <div vertical layout>
+        <paper-shadow z="1" class="content" >
+            <h1>{{detail.title}}</h1>
+            <span class="date">May {{detail.day}} / {{detail.start}} - {{detail.end}}</span>
+            <p class="description">{{detail.description}}</p>
+        </paper-shadow>
+      </div>
+    </core-scroll-header-panel>
+
+
+  </template>
+
+<script src="../bower_components/underscore/underscore.js"></script>
+<script>
+  Polymer('polyio-session-details', {
+    session: null,
+    ready: function() {
+      this.data = JSON.parse(window.localStorage.getItem('polyio-schedule-data'));
+      if (!this.data) { return; }
+
+      this.keynote = this.data.sessions[0];
+      this.sessions = this.data.sessions;
+      // console.log(this.sessions);
+      this.createIdMap(this.sessions);
+      // console.log(this.idMap);
+    },
+    createIdMap: function(arr) {
+      this.idMap = _.pluck(arr, 'id');
+    },
+    getIdIndex: function(id) {
+      return _.indexOf(this.idMap, id);
+    },
+    attributeChanged: function(attrName, oldVal, newVal) {
+      //var newVal = this.getAttribute(attrName);
+      // console.log(attrName, 'old: ' + oldVal, 'new:', newVal);
+      if (newVal) {
+        var index = this.getIdIndex(newVal);
+        this.detail = this.sessions[index];
+      }
+    },
+    closeDetail: function() {
+      this.fire('closeSessionDetails');
+    }
+  });
+</script>
+</polymer-element>

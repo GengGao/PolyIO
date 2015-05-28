@@ -1,0 +1,47 @@
+:host {
+  height: 100vh;
+}
+
+:host *,
+::content * {
+  font-family: RobotoDraft, sans-serif;
+  color: #333;
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.content {
+  padding: 1em;
+  background-color: #fff;
+}
+
+.description {
+  color: #7C7C7C;
+  padding: 10px 0;
+}
+
+core-scroll-header-panel {
+  height: 100%;
+}
+
+core-image {
+  height: 260px;
+}
+
+core-header-panel .content {
+  height: 500px;
+}
+
+paper-icon-button::shadow #ripple {
+  color: #fff;
+}
